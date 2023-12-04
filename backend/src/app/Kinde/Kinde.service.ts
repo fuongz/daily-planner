@@ -1,8 +1,7 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as jwksClient from 'jwks-rsa';
 import * as jwt from 'jsonwebtoken';
-import { promisify } from 'util';
 
 @Injectable()
 export class KindeService {
@@ -12,8 +11,7 @@ export class KindeService {
       const client = jwksClient({
         jwksUri: this.configService.get('KINDE_JWK_URL'),
       });
-
-      client.getSigningKey(header.kid, function (err, key) {
+      client.getSigningKey(header.kid, function (_err, key) {
         const signingKey = key.getPublicKey();
         callback(null, signingKey);
       });

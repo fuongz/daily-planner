@@ -17,6 +17,7 @@ export default function App() {
       domain={import.meta.env.VITE_KINDLE_DOMAIN}
       redirectUri={import.meta.env.VITE_KINDLE_REDIRECT_URL}
       logoutUri={import.meta.env.VITE_KINDLE_LOGOUT_URL}
+      scope="openid profile email offline"
     >
       <ChakraProvider theme={theme}>{rootRoutes}</ChakraProvider>
     </KindeProvider>

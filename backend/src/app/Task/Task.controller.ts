@@ -1,7 +1,15 @@
-import { Controller, Get, UseGuards, UseInterceptors } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Req,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { TaskService } from './Task.service';
 import { FormatResponseInterceptor } from 'src/core/interceptors/format-response.interceptor';
-import { KindeGuard } from '../Auth/Auth.guard';
+import { KindeGuard } from '../Kinde/Kinde.guard';
+import { DailyTask } from 'src/mongo/schemas';
 
 @Controller('tasks')
 @UseInterceptors(FormatResponseInterceptor)
@@ -10,7 +18,16 @@ export class TaskController {
   constructor(private taskService: TaskService) {}
 
   @Get()
-  async getAll() {
-    return this.taskService.getAll();
+  async getAll(@Req() req: any) {
+    return this.taskService.getAll(req.user);
+  }
+
+  @Post()
+  async create(@Req() req: any) {
+    const task: DailyTask = {
+      ...req.body,
+      user_id: req.user._id,
+    };
+    return this.taskService.create(task);
   }
 }
