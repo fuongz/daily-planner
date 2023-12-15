@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 3662",
+    "dev": "vite --port 3663",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -22,7 +22,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",
-    "react-router-dom": "^6.11.2"
+    "react-router-dom": "^6.11.2",
+    "zod": "^3.22.4",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^4.29.9",

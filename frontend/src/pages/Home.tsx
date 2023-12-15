@@ -1,5 +1,5 @@
-import { Avatar, Box, Button, CheckboxGroup, Container, Flex, Grid, GridItem, HStack, Link, Spinner, Stack, Text, useCheckbox, useCheckboxGroup } from '@chakra-ui/react'
-import { useEffect, useMemo } from 'react'
+import { Avatar, Button, Container, Flex, GridItem, HStack, Text } from '@chakra-ui/react'
+import { useMemo } from 'react'
 import { Task } from '@/components/screen/home/Task'
 import { TTask } from '@/types/task'
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react'
@@ -8,7 +8,7 @@ import { withAuthWrapper } from '@/components/shared/AuthWrapper'
 interface HomeProps {}
 
 const Home = (props: HomeProps) => {
-  const { login, register, logout, user, isAuthenticated, getToken } = useKindeAuth()
+  const { login, register, logout, user, isAuthenticated } = useKindeAuth()
   const defaultTasks: Array<TTask> = [
     {
       title: 'Pushup',
@@ -19,13 +19,6 @@ const Home = (props: HomeProps) => {
       value: 'a6d99aa4-9845-44cb-a01f-c2d7d9f61bb8',
     },
   ]
-
-  useEffect(() => {
-    const getTokenFunc = async () => {
-      console.log(await getToken(), user)
-    }
-    getTokenFunc()
-  }, [])
 
   const taskData = useMemo(() => {
     return defaultTasks
