@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chakra-ui/anatomy": "^2.2.2",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.1",
@@ -17,8 +18,10 @@
     "@fontsource-variable/jetbrains-mono": "^5.0.18",
     "@kinde-oss/kinde-auth-react": "^3.0.23",
     "@tanstack/react-query": "^4.29.12",
+    "axios": "^1.6.2",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.12",
+    "got": "^14.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.9.0",

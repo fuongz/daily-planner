@@ -1,10 +1,10 @@
-import Home from '../pages/Home'
+import { TaskFeature } from '@/features/Task'
 
 const rootRouter = [
   {
     path: '/',
-    element: <Home />
-  }
+    element: <TaskFeature />,
+  },
 ]
 
 export default rootRouter

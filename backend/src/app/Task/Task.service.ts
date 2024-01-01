@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { DailyTask } from 'src/mongo/schemas';
-import { IAuthUser } from 'src/types/AuthUser';
+import { DailyTask } from '@/mongo/schemas';
+import { IAuthUser } from '@/types/AuthUser';
 
 @Injectable()
 export class TaskService {

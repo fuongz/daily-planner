@@ -18,8 +18,13 @@
     "baseUrl": "./",
     "paths": {
       "@/components/*": ["./src/components/*"],
+      "@/components": ["./src/components"],
       "@/types/*": ["./src/types/*"],
-      "@/stores/*": ["./src/stores/*"]
+      "@/stores/*": ["./src/stores/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/constants/*": ["./src/constants/*"],
+      "@/services/*": ["./src/services/*"],
+      "@/hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["src"],

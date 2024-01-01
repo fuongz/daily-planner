@@ -7,9 +7,9 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { TaskService } from './Task.service';
-import { FormatResponseInterceptor } from 'src/core/interceptors/format-response.interceptor';
+import { FormatResponseInterceptor } from '@/core/interceptors/format-response.interceptor';
 import { KindeGuard } from '../Kinde/Kinde.guard';
-import { DailyTask } from 'src/mongo/schemas';
+import { DailyTask } from '@/mongo/schemas';
 
 @Controller('tasks')
 @UseInterceptors(FormatResponseInterceptor)

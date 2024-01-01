@@ -6,9 +6,6 @@ import '@fontsource-variable/jetbrains-mono'
 
 import routes from './routes'
 import theme from './theme'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
-const queryClient = new QueryClient()
 
 export default function App() {
   const rootRoutes = useRoutes(routes)
@@ -22,9 +19,7 @@ export default function App() {
       logoutUri={import.meta.env.VITE_KINDLE_LOGOUT_URL}
       scope="openid profile email offline"
     >
-      <ChakraProvider theme={theme}>
-        <QueryClientProvider client={queryClient}>{rootRoutes}</QueryClientProvider>
-      </ChakraProvider>
+      <ChakraProvider theme={theme}>{rootRoutes}</ChakraProvider>
     </KindeProvider>
   )
 }
