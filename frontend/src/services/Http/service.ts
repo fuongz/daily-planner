@@ -7,7 +7,7 @@ export const fetcher = (params: any, token: any) => {
   return httpServiceInstance
     .request({
       method: 'GET',
-      url: '/tasks',
+      url: `/${params}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },

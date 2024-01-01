@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios'
 
 export function useApi<TQueryKey extends [string, Record<string, unknown>?], TQueryFnData, TError, TData = TQueryFnData>(
   queryKey: TQueryKey,
-  fetcher: (params: TQueryKey[1], token: string | undefined) => Promise<TQueryFnData>,
+  fetcher: (params: TQueryKey[0], token: string | undefined) => Promise<TQueryFnData>,
   options?: Omit<UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, 'queryKey' | 'queryFn'>
 ) {
   const { getToken } = useKindeAuth()
@@ -12,7 +12,7 @@ export function useApi<TQueryKey extends [string, Record<string, unknown>?], TQu
     queryKey,
     queryFn: async () => {
       const token = await getToken()
-      return fetcher(queryKey[1], token)
+      return fetcher(queryKey[0], token)
     },
     ...options,
   })
@@ -25,7 +25,7 @@ export function useApiMutation(mutationKey: any, fetcher: any, options?: any) {
     mutationKey,
     mutationFn: async (data: any) => {
       const token = await getToken()
-      return fetcher(mutationKey[1], data, token)
+      return fetcher(mutationKey[0], data, token)
     },
     onSuccess: (data: AxiosResponse) => {
       if (data.status === 200 || data.status === 201) {

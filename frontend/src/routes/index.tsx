@@ -1,9 +1,9 @@
-import { TaskFeature } from '@/features/Task'
+import { FinanceFeature } from '@/features/Finance'
 
 const rootRouter = [
   {
     path: '/',
-    element: <TaskFeature />,
+    element: <FinanceFeature />,
   },
 ]
 
