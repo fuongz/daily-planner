@@ -6,8 +6,8 @@ const { definePartsStyle, defineMultiStyleConfig } = createMultiStyleConfigHelpe
 const outline = definePartsStyle({
   field: {
     _focusVisible: {
-      borderColor: 'purple.500',
-      boxShadow: '0 0 0 1px var(--chakra-colors-purple-500)',
+      borderColor: 'yellow.400',
+      boxShadow: 'rgb(255, 255, 255) 0px 0px 0px 0px, var(--chakra-colors-yellow-100) 0px 0px 0px 4px, rgba(0, 0, 0, 0) 0px 0px 0px 0px',
     },
   },
 })

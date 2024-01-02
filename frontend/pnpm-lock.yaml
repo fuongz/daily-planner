@@ -20,9 +20,18 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.46)(react@18.2.0)
-  '@fontsource-variable/jetbrains-mono':
-    specifier: ^5.0.18
-    version: 5.0.19
+  '@fontsource-variable/cabin':
+    specifier: ^5.0.17
+    version: 5.0.17
+  '@fontsource-variable/raleway':
+    specifier: ^5.0.17
+    version: 5.0.17
+  '@fontsource/barlow':
+    specifier: ^5.0.8
+    version: 5.0.8
+  '@fontsource/metropolis':
+    specifier: ^5.0.7
+    version: 5.0.7
   '@kinde-oss/kinde-auth-react':
     specifier: ^3.0.23
     version: 3.0.23(react-dom@18.2.0)(react@18.2.0)
@@ -1807,8 +1816,20 @@ packages:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
     dev: false
 
-  /@fontsource-variable/jetbrains-mono@5.0.19:
-    resolution: {integrity: sha512-7PTG1Kp3B/FgoNVPT8da4humj5JxQYxTtO08ZPS2IfanS37Yb/WShbgScnG/iupuFwiRnHVkIuC/2czxItxmyg==}
+  /@fontsource-variable/cabin@5.0.17:
+    resolution: {integrity: sha512-iabCsDQL4BBnJmzHNDpl5N6IHJDCRkbLIoOdzEvvc4j1AE9Fep7tV8i9CuNL5ZpsPeYq5oWi21JRT9vU7if5Yg==}
+    dev: false
+
+  /@fontsource-variable/raleway@5.0.17:
+    resolution: {integrity: sha512-wPkYD9UACWS1fM4GUYwKhJDGE5tD1IuVIkGcbccsuip+PmbIRApqDF7tlpkD333xXlmP4tsRZsXkAj8IBTkRrg==}
+    dev: false
+
+  /@fontsource/barlow@5.0.8:
+    resolution: {integrity: sha512-RMUw8YyoNG3o1rwMnfyyWqYuR7k6H48yYZwpCsgY0x7jeaRdp/FdyG6lPLD5P403kDyqauewldk+VDPhQ65+4w==}
+    dev: false
+
+  /@fontsource/metropolis@5.0.7:
+    resolution: {integrity: sha512-4msG3iWhQWL9vOVEHHkGGC4ugfDC4nf144/XspzrLhoVpYvClx6kxzIJw7I1XS8O83QUKVuacca0EQxGQ4mDzw==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.13:

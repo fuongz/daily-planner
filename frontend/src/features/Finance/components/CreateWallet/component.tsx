@@ -111,12 +111,11 @@ const CreateWallet: React.FC = ({}: CreateWalletProps) => {
                 </ModalBody>
 
                 <ModalFooter>
-                  <Button colorScheme="purple" isLoading={props.isSubmitting} type="submit" mr={3}>
-                    Create
-                  </Button>
-
-                  <Button colorScheme="ghost" variant="ghost" onClick={onClose}>
+                  <Button colorScheme="gray" onClick={onClose}>
                     Cancel
+                  </Button>
+                  <Button isLoading={props.isSubmitting} type="submit" ml={3}>
+                    Create new wallet
                   </Button>
                 </ModalFooter>
               </Form>

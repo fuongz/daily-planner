@@ -22,7 +22,7 @@ export class KindeStrategy extends PassportStrategy(Strategy, 'kinde') {
       throw new UnauthorizedException();
     }
     const bearerTokenArr = bearerToken.split(' ');
-    if (bearerTokenArr.length < 2) {
+    if (bearerTokenArr.length < 2 || bearerTokenArr[1] === 'undefined') {
       throw new UnauthorizedException();
     }
     const validated: any = await this.kindeService.validate(bearerTokenArr[1]);

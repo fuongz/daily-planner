@@ -2,7 +2,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { KindeProvider } from '@kinde-oss/kinde-auth-react'
 import { useRoutes } from 'react-router-dom'
 
-import '@fontsource-variable/jetbrains-mono'
+import '@fontsource-variable/cabin'
 
 import routes from './routes'
 import theme from './theme'

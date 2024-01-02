@@ -14,6 +14,7 @@ export function useApi<TQueryKey extends [string, Record<string, unknown>?], TQu
       const token = await getToken()
       return fetcher(queryKey[0], token)
     },
+    retry: false,
     ...options,
   })
 }

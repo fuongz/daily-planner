@@ -1,9 +1,8 @@
 import { withAuthWrapper } from '@/components/AuthWrapper'
 import { DataBlock } from '@/components/common'
 import { getAllWallets } from '@/services/Wallet'
-import { Image, Select, VStack } from '@chakra-ui/react'
+import { Button, Image, Text, VStack } from '@chakra-ui/react'
 import { CreateWallet } from './components'
-import { IWallet } from '@/types/wallet'
 
 interface FinanceFeatureProps {}
 
@@ -14,18 +13,17 @@ const FinanceFeature = ({}: FinanceFeatureProps) => {
       <DataBlock data={data}>
         {data && data.length === 0 ? (
           <VStack alignContent="center" justifyContent="center" p={48}>
-            <Image src="/assets/images/icon-empty-box.png" mb={8} />
+            <Image src="/assets/images/icon-empty-box.png" />
+            <Text my={4} fontWeight={600}>
+              Let's get you started…
+            </Text>
             <CreateWallet />
           </VStack>
         ) : (
-          <Select w={100} mt={4}>
-            {data &&
-              data.map((wallet: IWallet) => (
-                <option key={wallet._id} value={wallet._id}>
-                  {wallet.name}
-                </option>
-              ))}
-          </Select>
+          <VStack gap={8}>
+            <Image src="/assets/images/icon-empty-transaction.png" w={48} />
+            <Button>Create new transaction</Button>
+          </VStack>
         )}
       </DataBlock>
     </>
