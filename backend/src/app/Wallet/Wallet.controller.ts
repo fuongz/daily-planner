@@ -10,12 +10,16 @@ import { FormatResponseInterceptor } from '@/core/interceptors/format-response.i
 import { KindeGuard } from '../Kinde/Kinde.guard';
 import { Wallet } from '@/mongo/schemas';
 import { WalletService } from './Wallet.service';
+import { CategoryService } from '../Category/Category.service';
 
 @Controller('wallets')
 @UseInterceptors(FormatResponseInterceptor)
 @UseGuards(KindeGuard)
 export class WalletController {
-  constructor(private walletService: WalletService) {}
+  constructor(
+    private walletService: WalletService,
+    private categoryService: CategoryService,
+  ) {}
 
   @Get()
   async getAll(@Req() req: any) {
@@ -28,6 +32,8 @@ export class WalletController {
       ...req.body,
       user_id: req.user._id,
     };
-    return this.walletService.create(doc);
+    const wallet = await this.walletService.create(doc);
+    const categories = await this.categoryService.createDefaults(req.user);
+    return { wallet, categories };
   }
 }

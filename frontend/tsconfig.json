@@ -24,6 +24,7 @@
       "@/features/*": ["./src/features/*"],
       "@/constants/*": ["./src/constants/*"],
       "@/services/*": ["./src/services/*"],
+      "@/services": ["./src/services"],
       "@/hooks/*": ["./src/hooks/*"]
     }
   },

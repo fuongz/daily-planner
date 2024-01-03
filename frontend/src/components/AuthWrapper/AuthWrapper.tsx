@@ -13,16 +13,17 @@ const Navigation: React.FC<NavigationProps> = () => {
 
   return (
     <HStack mt={4} justifyContent="flex-end" gap={4}>
-      <Box mr="auto">
-        <Select w={100}>
-          {data &&
-            data.map((wallet: IWallet) => (
+      {!!data && data.length > 0 && (
+        <Box mr="auto">
+          <Select w={100}>
+            {data.map((wallet: IWallet) => (
               <option key={wallet._id} value={wallet._id}>
                 {wallet.name}
               </option>
             ))}
-        </Select>
-      </Box>
+          </Select>
+        </Box>
+      )}
       {!!user?.picture && <Avatar size="sm" src={user?.picture} />}
       <Text fontWeight={600}>
         {user?.given_name} {user?.family_name}

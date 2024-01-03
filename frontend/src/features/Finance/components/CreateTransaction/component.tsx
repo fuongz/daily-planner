@@ -19,32 +19,28 @@ import { Form, Field, Formik } from 'formik'
 import { useRef } from 'react'
 import { formSchema, transform } from './schema'
 import { CurrencySelect } from '@/components/common'
-import { createWallet } from '@/services/Wallet'
+import { createTransaction } from '@/services'
+import { getAllCategories } from '@/services/Category'
+import { NumericFormat } from 'react-number-format'
 
-interface CreateWalletProps {}
+interface CreateTransactionProps {}
 
-const CreateWallet: React.FC = ({}: CreateWalletProps) => {
+const CreateTransaction: React.FC = ({}: CreateTransactionProps) => {
   const { onClose, onOpen, isOpen } = useDisclosure()
+  const { data: categories } = getAllCategories()
   const toast = useToast()
-  const { mutateAsync } = createWallet()
+  const { mutateAsync } = createTransaction()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
 
   const handleSubmit = (data: any, actions: any) => {
-    mutateAsync(transform(data)).then((response: any) => {
-      if (response.status !== 201) {
-        toast({ title: 'Error', position: 'top', description: response.message, status: 'error', duration: 5000, isClosable: true })
-      } else {
-        onClose()
-      }
-      actions.setSubmitting(false)
-    })
+    console.log(data, actions)
   }
 
   return (
     <>
       <Button colorScheme="yellow" onClick={onOpen}>
-        Set up a wallet
+        Create new transaction
       </Button>
 
       <Modal initialFocusRef={initialRef} finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
@@ -52,9 +48,11 @@ const CreateWallet: React.FC = ({}: CreateWalletProps) => {
         <ModalContent>
           <Formik
             initialValues={{
-              name: '',
-              type: 'basic',
-              currency: 'vnd',
+              amount: null,
+              note: '',
+              timestamp: new Date(),
+              category_id: null,
+              wallet_id: null,
               status: false,
             }}
             validationSchema={formSchema}
@@ -62,36 +60,25 @@ const CreateWallet: React.FC = ({}: CreateWalletProps) => {
           >
             {(props) => (
               <Form>
-                <ModalHeader>Create new wallet</ModalHeader>
+                <ModalHeader>Create new transaction</ModalHeader>
                 <ModalBody>
-                  <Field name="name">
+                  <Field name="amount">
                     {({ field, form }: any) => (
-                      <FormControl isInvalid={form.errors.name && form.touched.name}>
-                        <FormLabel>Name</FormLabel>
-                        <Input ref={initialRef} {...field} autoComplete="off" placeholder="Wallet name" />
+                      <FormControl isInvalid={form.errors.amount && form.touched.amount}>
+                        <FormLabel>Amount</FormLabel>
+                        <NumericFormat
+                          customInput={Input}
+                          defaultValue={field.value}
+                          {...field}
+                          onValueChange={(values) => {
+                            form.setFieldValue(field.name, values.floatValue)
+                          }}
+                          suffix={' đ'}
+                          thousandSeparator=","
+                          decimalSeparator="."
+                          placeholder="0 đ"
+                        />
                         <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                      </FormControl>
-                    )}
-                  </Field>
-
-                  <Field name="type">
-                    {({ field, form }: any) => (
-                      <FormControl mt={4} isInvalid={form.errors.type && form.touched.type}>
-                        <FormLabel>Type</FormLabel>
-                        <Select {...field} isReadOnly isDisabled placeholder="Select option">
-                          <option value="basic">Basic</option>
-                        </Select>
-                        <FormErrorMessage>{form.errors.type}</FormErrorMessage>
-                      </FormControl>
-                    )}
-                  </Field>
-
-                  <Field name="currency">
-                    {({ field, form }: any) => (
-                      <FormControl mt={4} isInvalid={form.errors.currency && form.touched.currency}>
-                        <FormLabel>Currency</FormLabel>
-                        <CurrencySelect fieldName="currency" {...field} />
-                        <FormErrorMessage>{form.errors.currency}</FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
@@ -114,7 +101,7 @@ const CreateWallet: React.FC = ({}: CreateWalletProps) => {
                     Cancel
                   </Button>
                   <Button isLoading={props.isSubmitting} type="submit" ml={3}>
-                    Create new wallet
+                    Create new transaction
                   </Button>
                 </ModalFooter>
               </Form>
@@ -126,4 +113,4 @@ const CreateWallet: React.FC = ({}: CreateWalletProps) => {
   )
 }
 
-export { CreateWallet }
+export { CreateTransaction }

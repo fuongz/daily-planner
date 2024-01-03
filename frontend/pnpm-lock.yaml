@@ -23,15 +23,6 @@ dependencies:
   '@fontsource-variable/cabin':
     specifier: ^5.0.17
     version: 5.0.17
-  '@fontsource-variable/raleway':
-    specifier: ^5.0.17
-    version: 5.0.17
-  '@fontsource/barlow':
-    specifier: ^5.0.8
-    version: 5.0.8
-  '@fontsource/metropolis':
-    specifier: ^5.0.7
-    version: 5.0.7
   '@kinde-oss/kinde-auth-react':
     specifier: ^3.0.23
     version: 3.0.23(react-dom@18.2.0)(react@18.2.0)
@@ -59,6 +50,9 @@ dependencies:
   react-icons:
     specifier: ^4.9.0
     version: 4.12.0(react@18.2.0)
+  react-number-format:
+    specifier: ^5.3.1
+    version: 5.3.1(react-dom@18.2.0)(react@18.2.0)
   react-router-dom:
     specifier: ^6.11.2
     version: 6.21.1(react-dom@18.2.0)(react@18.2.0)
@@ -1820,18 +1814,6 @@ packages:
     resolution: {integrity: sha512-iabCsDQL4BBnJmzHNDpl5N6IHJDCRkbLIoOdzEvvc4j1AE9Fep7tV8i9CuNL5ZpsPeYq5oWi21JRT9vU7if5Yg==}
     dev: false
 
-  /@fontsource-variable/raleway@5.0.17:
-    resolution: {integrity: sha512-wPkYD9UACWS1fM4GUYwKhJDGE5tD1IuVIkGcbccsuip+PmbIRApqDF7tlpkD333xXlmP4tsRZsXkAj8IBTkRrg==}
-    dev: false
-
-  /@fontsource/barlow@5.0.8:
-    resolution: {integrity: sha512-RMUw8YyoNG3o1rwMnfyyWqYuR7k6H48yYZwpCsgY0x7jeaRdp/FdyG6lPLD5P403kDyqauewldk+VDPhQ65+4w==}
-    dev: false
-
-  /@fontsource/metropolis@5.0.7:
-    resolution: {integrity: sha512-4msG3iWhQWL9vOVEHHkGGC4ugfDC4nf144/XspzrLhoVpYvClx6kxzIJw7I1XS8O83QUKVuacca0EQxGQ4mDzw==}
-    dev: false
-
   /@humanwhocodes/config-array@0.11.13:
     resolution: {integrity: sha512-JSBDMiDKSzQVngfRjOdFXgFfklaXI4K9nLF49Auh21lmBWRLIK3+xTErTWD4KU54pb6coM6ESE7Awz/FNU3zgQ==}
     engines: {node: '>=10.10.0'}
@@ -3187,6 +3169,17 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+    dev: false
+
+  /react-number-format@5.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-qpYcQLauIeEhCZUZY9jXZnnroOtdy3jYaS1zQ3M1Sr6r/KMOBEIGNIb7eKT19g2N1wbYgFgvDzs19hw5TrB8XQ==}
+    peerDependencies:
+      react: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^0.14 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-refresh@0.14.0:

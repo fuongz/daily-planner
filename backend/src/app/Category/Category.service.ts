@@ -20,4 +20,21 @@ export class CategoryService {
   async create(doc: Category) {
     return this.categoryModel.create(doc);
   }
+
+  async createDefaults(user) {
+    return this.categoryModel.insertMany([
+      {
+        name: 'Other',
+        type: 1,
+        parent_id: null,
+        user_id: user._id,
+      },
+      {
+        name: 'Other',
+        type: -1,
+        parent_id: null,
+        user_id: user._id,
+      },
+    ]);
+  }
 }

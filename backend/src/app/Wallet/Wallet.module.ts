@@ -1,8 +1,15 @@
 import { Module } from '@nestjs/common';
 import { WalletController } from './Wallet.controller';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Wallet, WalletSchema } from 'src/mongo/schemas';
+import {
+  Category,
+  CategorySchema,
+  Wallet,
+  WalletSchema,
+} from 'src/mongo/schemas';
 import { WalletService } from './Wallet.service';
+import { CategoryModule } from '../Category/Category.module';
+import { CategoryService } from '../Category/Category.service';
 
 @Module({
   imports: [
@@ -11,9 +18,14 @@ import { WalletService } from './Wallet.service';
         name: Wallet.name,
         schema: WalletSchema,
       },
+      {
+        name: Category.name,
+        schema: CategorySchema,
+      },
     ]),
+    CategoryModule,
   ],
-  providers: [WalletService],
+  providers: [WalletService, CategoryService],
   controllers: [WalletController],
   exports: [WalletService],
 })
