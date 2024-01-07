@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,
@@ -10,31 +11,35 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Select,
   Switch,
+  Textarea,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react'
-import { Form, Field, Formik } from 'formik'
+import { Form, Field, Formik, FieldProps, FormikHelpers } from 'formik'
 import { useRef } from 'react'
 import { formSchema, transform } from './schema'
-import { CurrencySelect } from '@/components/common'
-import { createTransaction } from '@/services'
+import { capitalizeFirstLetter, createTransaction, getAllWallets } from '@/services'
 import { getAllCategories } from '@/services/Category'
 import { NumericFormat } from 'react-number-format'
+import { CommonSelect } from '@/components/common/CommonSelect/component'
+import dayjs from 'dayjs'
 
 interface CreateTransactionProps {}
 
 const CreateTransaction: React.FC = ({}: CreateTransactionProps) => {
   const { onClose, onOpen, isOpen } = useDisclosure()
   const { data: categories } = getAllCategories()
+  const { data: wallets } = getAllWallets()
+
   const toast = useToast()
   const { mutateAsync } = createTransaction()
   const initialRef = useRef(null)
   const finalRef = useRef(null)
 
-  const handleSubmit = (data: any, actions: any) => {
+  const handleSubmit = (data: any, actions: FormikHelpers<any>) => {
     console.log(data, actions)
+    actions.setSubmitting(true)
   }
 
   return (
@@ -50,9 +55,9 @@ const CreateTransaction: React.FC = ({}: CreateTransactionProps) => {
             initialValues={{
               amount: null,
               note: '',
-              timestamp: new Date(),
+              timestamp: dayjs().format('YYYY-MM-DD'),
               category_id: null,
-              wallet_id: null,
+              wallet_id: wallets[0]._id,
               status: false,
             }}
             validationSchema={formSchema}
@@ -63,22 +68,65 @@ const CreateTransaction: React.FC = ({}: CreateTransactionProps) => {
                 <ModalHeader>Create new transaction</ModalHeader>
                 <ModalBody>
                   <Field name="amount">
-                    {({ field, form }: any) => (
-                      <FormControl isInvalid={form.errors.amount && form.touched.amount}>
+                    {({ field, form }: FieldProps) => (
+                      <FormControl isInvalid={!!form.errors.amount && !!form.touched.amount}>
                         <FormLabel>Amount</FormLabel>
                         <NumericFormat
                           customInput={Input}
                           defaultValue={field.value}
-                          {...field}
                           onValueChange={(values) => {
                             form.setFieldValue(field.name, values.floatValue)
                           }}
+                          name={field.name}
                           suffix={' đ'}
                           thousandSeparator=","
                           decimalSeparator="."
                           placeholder="0 đ"
                         />
-                        <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                        <FormErrorMessage>{capitalizeFirstLetter(form.errors.amount as string)}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+
+                  <Field name="note">
+                    {({ field, form }: any) => (
+                      <FormControl mt={4} isInvalid={form.errors.note && form.touched.note}>
+                        <FormLabel>Note</FormLabel>
+                        <Textarea {...field} placeholder="Note" />
+                        <FormErrorMessage>{capitalizeFirstLetter(form.errors.note)}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+
+                  <Field name="category_id">
+                    {({ field, form }: any) => (
+                      <FormControl mt={4} isInvalid={form.errors.category_id && form.touched.category_id}>
+                        <FormLabel>Category</FormLabel>
+                        <CommonSelect
+                          options={categories.map((category: any) => ({ value: category._id, label: `${category.type === 1 ? 'Income: ' : 'Outcome: '} ${category.name}` }))}
+                          fieldName="category_id"
+                          {...field}
+                        />
+                        <FormErrorMessage>{capitalizeFirstLetter(form.errors.category_id)}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+
+                  <Field name="wallet_id">
+                    {({ field, form }: any) => (
+                      <FormControl mt={4} isInvalid={form.errors.wallet_id && form.touched.wallet_id}>
+                        <FormLabel>Wallet</FormLabel>
+                        <CommonSelect options={wallets.map((wallet: any) => ({ value: wallet._id, label: wallet.name }))} fieldName="wallet_id" {...field} />
+                        <FormErrorMessage>{capitalizeFirstLetter(form.errors.category_id)}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+
+                  <Field name="timestamp">
+                    {({ field, form }: any) => (
+                      <FormControl mt={4} isInvalid={form.errors.timestamp && form.touched.timestamp}>
+                        <FormLabel>Date</FormLabel>
+                        <Input {...field} placeholder="Select Date and Time" type="date" />
                       </FormControl>
                     )}
                   </Field>
@@ -90,7 +138,7 @@ const CreateTransaction: React.FC = ({}: CreateTransactionProps) => {
                         <FormLabel htmlFor="status" mb="0">
                           Exclude from Total
                         </FormLabel>
-                        <FormErrorMessage>{form.errors.status}</FormErrorMessage>
+                        <FormErrorMessage>{capitalizeFirstLetter(form.errors.status)}</FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>

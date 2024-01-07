@@ -1,9 +1,10 @@
-import { Avatar, Box, Button, Container, HStack, Image, Select, Spinner, Text, VStack } from '@chakra-ui/react'
+import { Avatar, Box, Button, Container, HStack, Image, Menu, MenuButton, MenuGroup, MenuItem, MenuList, Select, Spinner, Text, VStack } from '@chakra-ui/react'
 import { useKindeAuth } from '@kinde-oss/kinde-auth-react'
 import { ComponentType, useEffect, useState } from 'react'
 import { getActions, getUser } from '@/stores/index'
 import { getAllWallets } from '@/services/Wallet'
 import { IWallet } from '@/types/wallet'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 
 interface NavigationProps {}
 
@@ -12,7 +13,7 @@ const Navigation: React.FC<NavigationProps> = () => {
   const { user, logout } = useKindeAuth()
 
   return (
-    <HStack mt={4} justifyContent="flex-end" gap={4}>
+    <HStack mt={4} justifyContent="flex-end" gap={6}>
       {!!data && data.length > 0 && (
         <Box mr="auto">
           <Select w={100}>
@@ -24,13 +25,12 @@ const Navigation: React.FC<NavigationProps> = () => {
           </Select>
         </Box>
       )}
-      {!!user?.picture && <Avatar size="sm" src={user?.picture} />}
-      <Text fontWeight={600}>
-        {user?.given_name} {user?.family_name}
-      </Text>
-      <Button onClick={() => logout()} colorScheme="red">
-        Logout
-      </Button>
+      <Menu>
+        <MenuButton as={Avatar} cursor="pointer" size="sm" src={user?.picture || ''} />
+        <MenuList>
+          <MenuItem onClick={() => logout()}>Logout</MenuItem>
+        </MenuList>
+      </Menu>
     </HStack>
   )
 }

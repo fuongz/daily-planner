@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 import { FI_WALLET_TYPES, FI_WALLET_CURRENCIES } from '@/constants/fi-wallet'
 
 export const formSchema = Yup.object().shape({
-  amount: Yup.string(),
+  amount: Yup.number().moreThan(0).required(),
   status: Yup.boolean(),
 })
 
